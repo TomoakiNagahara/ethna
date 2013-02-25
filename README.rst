@@ -34,7 +34,8 @@ PEARコマンドでインストールする
 gitでインストールする
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-  For Linux / Mac OS X
+For Mac OS X's XAMPP::
+
   $ sudo mkdir /www
   $ cd /www
   $ git clone https://github.com/TomoakiNagahara/ethna
