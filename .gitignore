@@ -1,2 +1,6 @@
 package.xml
 data/
+.buildpath
+.project
+.settings/
+
