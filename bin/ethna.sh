@@ -9,26 +9,35 @@
 
 CUR_DIR="$PWD"
 
+#  Ethna installed directory
+ETHNA_HOME="/www/ethna"
+#  For XAMPPP settings.
+PEAR_DIR="/Applications/XAMPP/xamppfiles/lib/php/pear"
+#  ???
+PHP_BIN="/Applications/XAMPP/xamppfiles/bin/php"
+#  ???
+PHP_BINARY="/Applications/XAMPP/xamppfiles/bin/php"
+
 if test -z "$ETHNA_HOME"
 then
     while [ 1 ];
     do
         if test -f ".ethna"
         then
-            if test -f "$PWD""/lib/Ethna/Ethna.php"
+            if test -f "$PWD/lib/Ethna/Ethna.php"
             then
-                ETHNA_HOME="$PWD""/lib/Ethna"
-                DOT_ETHNA="$PWD""/.ethna"
+                ETHNA_HOME="$PWD/lib/Ethna"
+                DOT_ETHNA="$PWD/.ethna"
                 break
             fi
         fi
         if [ "$PWD" = "/" ];
         then
-            if test "@PEAR-DIR@/pear" = '@'PEAR-DIR'@'
+            if test "$PEAR_DIR" = '@'PEAR-DIR'@'
             then
                 ETHNA_HOME="/usr/share/php/Ethna"
             else
-                ETHNA_HOME="@PEAR-DIR@/Ethna"
+                ETHNA_HOME="$PEAR_DIR/Ethna"
             fi
             DOT_ETHNA=""
             break
@@ -41,11 +50,11 @@ cd $CUR_DIR
 
 if test -z "$PHP_COMMAND"
 then
-    if test "@PHP-BIN@" = '@'PHP-BIN'@'
+    if test "PHP_BIN" = '@'PHP-BIN'@'
     then
         PHP_COMMAND="php"
     else
-        PHP_COMMAND="@PHP-BINARY@"
+        PHP_COMMAND="$PHP_BINARY"
     fi
     export PHP_COMMAND
 fi

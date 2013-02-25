@@ -31,6 +31,16 @@ PEARコマンドでインストールする
   $ sudo pear install -a ethna/ethna
 
 
+gitでインストールする
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+  For Linux / Mac OS X
+  $ sudo mkdir /www
+  $ cd /www
+  $ git clone https://github.com/TomoakiNagahara/ethna
+  $ ln -s /www/ethna/bin/ethna.sh /usr/bin/ethna
+  $ ethna -v
+
 その他
 ^^^^^^^
 
