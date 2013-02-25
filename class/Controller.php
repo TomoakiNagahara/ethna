@@ -1264,6 +1264,51 @@ class Ethna_Controller
     }
 
     /**
+     * Support to SmartURL.
+     *
+     * Not smart, original ethna action.
+     * I want to using so cool URL.
+     *
+     * @see http://rd.uniba.jp/blog/2010/06/30/ethna-で綺麗な-url-ethna_urlhandler-を使わない方法
+     * @return string action_name
+     */
+    function _getActionName_Form()
+    {
+    	switch( strtolower(getenv('REQUEST_METHOD')) ){
+    		case 'get':
+    			$request = $_GET;
+    			break;
+    
+    		case 'post':
+    			$request = $_POST;
+    			break;
+    
+    		default:
+    			$request = null;
+    	}
+    	 
+    	foreach ($request as $name => $value){
+    		if( empty($value) ){
+    			continue;
+    		}
+    		 
+    		if( strncmp($name, 'action_', 7) !== 0 ) {
+    			continue;
+    		}
+    		 
+    		//  Ethna Style - http://fqdn/?action_foo
+    		return $this->_getActionName_Form_origin();
+    	}
+    	 
+    	//  SmartURI - http://fqdn/action/name/
+    	if(!empty($_SERVER['REDIRECT_URL'])){
+    		$redirect_url = $_SERVER['REDIRECT_URL'];
+    		$action_name = str_replace('/', '_', $redirect_url);
+    		return trim($action_name, '_');
+    	}
+    }
+    
+    /**
      *  フォームにより要求されたアクション名を返す
      *
      *  アプリケーションの性質に応じてこのメソッドをオーバーライドして下さい。
@@ -1273,7 +1318,7 @@ class Ethna_Controller
      *  @access protected
      *  @return string  フォームにより要求されたアクション名
      */
-    protected function _getActionName_Form()
+    protected function _getActionName_Form_origin()
     {
         if (isset($_SERVER['REQUEST_METHOD']) == false) {
             return null;
